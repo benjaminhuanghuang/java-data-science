@@ -2,7 +2,12 @@ import java.util.List;
 
 public class TextLoading {
     public static void main(String[] args) {
-        List<String> lines = TextLoader.getLines("adult-sample.data");
-        System.out.println(lines);
+      List<String> lines = TextLoader.getLines("adult-sample.data");
+
+      List<PersonRecord> people = lines.stream()
+              .map((line) -> PersonRecordUtil.parsePerson(line))
+              .collect(Collectors.toList());
+      
+      people.forEach((person) -> System.out.println(person));
     }
 }
